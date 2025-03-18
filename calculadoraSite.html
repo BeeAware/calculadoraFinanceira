@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Produção de Mel</title>
+    <link rel="shortcut icon" href="favicon.ico" type="https://img.icons8.com/?size=100&id=80986&format=png&color=000000">
+</head>
+<body>
+    <header>
+        <div></div>
+    </header>
+    <div id="div_simulador">
+        <h2> Simule sua Produção de Mel</h2>
+        <p>Descubra <b>quanto mel</b> suas colmeias podem produzir e tenha uma <b>estimativa de seu faturamento</b> com nossa calculadora. <br>
+        Ideal para apicultorres que desejam melhorar sua produção, maximizar seus lucros e diminuir suas perdas.</p>
+        <h3>Informe seus dados:</h3>
+        Número de colmeias <br>
+        <input type="number" id="input_colmeias">
+        <br> <br>
+        Produção média por colmeia em 1 mês(kg). <br>
+        <input type="number" id="input_producao">
+        <br> <br>
+        Escolha o número respectivo do período desejado: <br><br>
+            "1" - Trimestral <br>
+            "2" - Semestral <br>
+            "3" - Anual <br>
+        <input type="number" id="input_periodo">
+        <br> <br>
+        Preço do mel por kg <br>
+        <input type="number" id="input_preco">
+        <br> <br>
+        <button style="background-color:greenyellow" onclick="calcular()">Calcular Agora</button> <br><br>
+        <div id="div_resultado"></div>
+    </div>
+</body>
+</html>
+<script>
+    function calcular(){
+        var qtdColmeias = Number(input_colmeias.value);
+        var producaoMel = Number(input_producao.value);
+        var periodo = (input_periodo.value);
+        var preco = Number(input_preco.value);
+        var total = qtdColmeias * producaoMel;
+        preco = preco * total;
+
+        if (periodo == "1"){
+            total = total * 3
+            preco = preco * 3
+        }else{              
+            if (periodo == "2"){
+                total = total * 6
+                preco *= 6
+            }else{
+                if (periodo == "3"){
+                    total = total * 12  
+                    preco = preco * 12
+                }else{
+                    div_resultado.innerHTML = `<div style="color:red">Entrada para o período inválida.</div>`
+                }
+            }
+        }
+        div_resultado.innerHTML = `A estimativa na quantidade de mel produzido é de ${total}kg. <br> E o faturamento é de R$${preco.toFixed(2)}`
+    }
+</script>
